@@ -202,63 +202,112 @@ def lang__for_film():
 #16
 
 def similar_words():
-    base = input()
+    # Решай через определение индексов гласных букв
+    base = list(input())
     n = int(input())
     examples = [input() for i in range(n)]
     glas = "а, у, о, ы, и, э, я, ю, ё, е".split(", ")
-    sglas = "б, в, г, д, ж, з, й, к, л, м, н, п, р, с, т, ф, х, ц, ч, ш, щ, ь".split(", ")
+    sample = []
+    compare = []
+    tmp = []
     res_list = []
     count_gl = 0
-    temp_count = 0
-    for ch in base:
-        if ch in glas:
-            count_gl+=1
-    flag = True
-    for i in range (len(examples)):
-        for ch in examples[i]:
+    for el in base:
+        if el in glas:
+            sample.append(base.index(el))
+            base[base.index(el)] = 0
+    for el in examples:
+        tmp = list(el)
+        print(tmp)
+        for ch in el:
             if ch in glas:
-                temp_count += 1
-        if count_gl == temp_count:
-            for j in range(len(base)):
-                if (base[j] in glas and examples[i][j] in glas) :
-                    pass
-                else:
-                    flag = False
-                    break
-            if flag:
-                res_list.append(examples[i])
-                temp_count = 0
-                flag =True
-        else:
-            temp_count = 0
-            continue
+                compare.append(tmp.index(ch))
+                tmp[tmp.index(ch)] = 0
+        if compare == sample:
+            res_list.append(el)
+        compare = []
     print(*res_list, sep="\n")
 
-similar_words()
-    #
-    #
-    #         else:
-    #             flag = False
-    #     if flag:
-    #         res_list.append(examples[i])
-    #
-    # print(glas)
-    # print(soglas)
-    # print(examples)
-    # print(res_list)
+# similar_words()
 
+#17
 
+def scary_task_mail ():
+    mail = ["ivan-petrov@beegeek.bzz", "petr-ivanov@beegeek.bzz", "ivan-petrov1@beegeek.bzz", "ivan-ivanov@beegeek.bzz",
+            "ivan-ivanov1@beegeek.bzz", "ivan-ivanov2@beegeek.bzz"]
+    name = ["ivan-ivanov",  "petr-petrov", "petr-ivanov"]
+    res = []
+    last = mail[0][mail[0].index("@"):]
+    prom_lst = []
+    nums_mail = []
+    for el in name:
+        if el not in "".join(mail):
+            tmp = el + last
+            res.append(tmp)
+            mail.append(tmp)
+        else:
+            prom_lst = [e for e in mail if el in e]
+            nums_mail = [e[len(el):e.index("@")] for e in prom_lst]
+            if "" not in nums_mail:
+                tmp = el + last
+                res.append(tmp)
+                mail.append(tmp)
+            else:
+                for i in range(1, 15):
+                    if str(i) not in nums_mail:
+                        tmp = el + str(i) + last
+                        res.append(tmp)
+                        mail.append(tmp)
+                        break
+                    else:
+                        continue
+        print(res)
 
+#18
 
-# машина
-# 8
-# сеть
-# машинист
-# дорога
-# урок
-# работа
-# аксиома
-# железо
-# ветеран
+def hellish_task():
+    data =[]
+    with open("files.txt", "r", encoding="UTF-8") as f:
+        for line in f:
+            line = line.rstrip("\n")
+            data.append(line)
 
+    dct = {el[el.index(".")+1:el.index(" ")]: [] for el in data}
+
+    for el in data:
+        tmp = el[el.index(".")+1:el.index(" ")]
+        dct.setdefault(tmp, []).append(el)
+
+    for k,v in sorted(dct.items()):
+        sigh = "B"
+        summ = 0
+        for el in sorted(v):
+
+            ed = el[el.rfind(" ")+1:]
+            zn = int(el[el.find(" "):el.rfind(" ")])
+            print(el[:el.find(" ")])
+            if ed == "B":
+                summ += zn
+            elif ed == "KB":
+                summ += zn * 1024
+            elif ed == "MB":
+                summ += zn * 1024*1024
+            else:
+                summ += zn * 1024 * 1024 * 1024
+
+        if (1024*1024) > summ> 1024:
+            sign = "KB"
+            res = str(round(int(summ)/1024)).rstrip(".0")
+            summ = f"{res} {sign}"
+        elif (1024*1024*1024) > summ > (1024*1024):
+            sign = "MB"
+            res = str(round(int(summ) / (1024*1024)))
+            summ = f"{res} {sign}"
+        else:
+            sign = "GB"
+            res = str(round(int(summ) / (1024 * 1024 * 1024)))
+            summ = f"{res} {sign}"
+        print("----------")
+        print(f"Summary: {summ}")
+        print()
 
