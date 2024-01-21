@@ -267,7 +267,7 @@ def scary_task_mail ():
 
 def hellish_task():
     data =[]
-    with open("files.txt", "r", encoding="UTF-8") as f:
+    with open("txts/files.txt", "r", encoding="UTF-8") as f:
         for line in f:
             line = line.rstrip("\n")
             data.append(line)

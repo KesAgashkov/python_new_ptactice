@@ -21,7 +21,7 @@ def exs_2():
 
 #3
 def exs_3():
-    with open('sales.csv', encoding='utf-8') as file:
+    with open('csv/sales.csv', encoding='utf-8') as file:
         data = file.read()
         goods = [r.split(';') for r in data.splitlines()]
         del goods[0]
@@ -30,7 +30,7 @@ def exs_3():
 
 #4
 def exs_4():
-    with open('salary_data.csv', encoding='utf-8') as file:
+    with open('csv/salary_data.csv', encoding='utf-8') as file:
         data = file.read()
         companyes= [r.split(';') for r in data.splitlines()]
         del companyes[0]
@@ -44,7 +44,7 @@ def exs_4():
 
 ## или вот так
 def exs_4_good():
-    with open('salary_data.csv', encoding='utf-8') as file:
+    with open('csv/salary_data.csv', encoding='utf-8') as file:
         d = {}
         for k, v in list(__import__('csv').reader(file, delimiter=';'))[1:]:
             d.setdefault(k, []).append(int(v))
@@ -53,7 +53,7 @@ def exs_4_good():
 
 #5
 def exs_5():
-    with open('deniro.csv', encoding='utf-8') as file:
+    with open('csv/deniro.csv', encoding='utf-8') as file:
         data = [r for r in csv.reader(file, delimiter=',')]
         sor = 2
         if sor == 1:
@@ -65,7 +65,7 @@ def exs_5():
 #или вот так
 def exs_5_good():
     n = int(input())
-    with open(r"deniro.csv", encoding='utf-8') as file:
+    with open(r"csv/deniro.csv", encoding='utf-8') as file:
         rows = csv.reader(file, quotechar='"')
         lst = [(a, int(b), int(c)) for a, b, c in rows]
         for el in sorted(lst, key=lambda x: x[n - 1]):
@@ -84,7 +84,7 @@ def exs_6(filename):
 #7
 def diff_task():
     res = {}
-    with open("data.csv", encoding='utf-8') as file_in, open("domain_usage.csv","w", encoding="utf-8",newline='') as file_out:
+    with open("csv/data.csv", encoding='utf-8') as file_in, open("csv/domain_usage.csv", "w", encoding="utf-8", newline='') as file_out:
         data = [el for el in csv.reader(file_in)]
         for el in data[1:]:
             res.setdefault(el[2].split("@")[1], []).append(el[1])
@@ -97,7 +97,7 @@ def diff_task():
 #8
 def diff_task_2():
     res = {}
-    with open("wifi.csv", encoding='utf-8') as file_in:
+    with open("csv/wifi.csv", encoding='utf-8') as file_in:
         data = [el for el in csv.reader(file_in, delimiter=';')]
         for el in data[1:]:
             res.setdefault(el[1], []).append(int(el[-1]))
@@ -108,7 +108,7 @@ def diff_task_2():
 def survive_on_titanic():
     res_mail = []
     res_wom =[]
-    with open("titanic.csv", encoding='utf-8') as file_in:
+    with open("csv/titanic.csv", encoding='utf-8') as file_in:
         data = [el for el in csv.reader(file_in, delimiter=';')]
         print(data)
         for el in data[1:]:
@@ -124,13 +124,13 @@ def survive_on_titanic():
 def hell_task():
     headers = []
     dct = {}
-    with open("name_log.csv", encoding='utf-8', ) as file_in:
+    with open("csv/name_log.csv", encoding='utf-8', ) as file_in:
         data = [el for el in csv.reader(file_in)]
         headers.extend(data.pop(0))
         for el in data:
             tmp_time = datetime.strptime(el[2], '%d/%m/%Y %H:%M')
             dct.setdefault(el[1], []).append((el[0], tmp_time))
-    with open("new_name_log.csv", "w", encoding='utf-8', newline='') as file_out:
+    with open("csv/new_name_log.csv", "w", encoding='utf-8', newline='') as file_out:
         writer = csv.writer(file_out, delimiter= "," )
         writer.writerow(headers)
         for k,v in sorted(dct.items(), key=lambda x: x[0]):
@@ -149,7 +149,7 @@ text = '''01,Artist,Otis Taylor
 03,Title,Willie Waylon And Me
 03,Time,3:26'''
 
-with open('data.csv', 'w', encoding='utf-8') as file:
+with open('csv/data.csv', 'w', encoding='utf-8') as file:
     file.write(text)
 def condense_csv(filename, id_name):
     res={}
@@ -164,7 +164,7 @@ def condense_csv(filename, id_name):
         for el in res[t]:
             headers.append(el[0])
 
-    with open("condensed.csv", "w", encoding='utf-8', newline='') as file_out:
+    with open("csv/condensed.csv", "w", encoding='utf-8', newline='') as file_out:
         writer = csv.writer(file_out, delimiter=",")
         writer.writerow(headers)
         tmp = []
@@ -180,7 +180,7 @@ def condense_csv(filename, id_name):
 #12 spicy
 def sort_list_pupils():
     res={}
-    with open("student_counts.csv", encoding='utf-8', ) as file_in:
+    with open("csv/student_counts.csv", encoding='utf-8', ) as file_in:
         data = [el for el in csv.reader(file_in)]
         for i in range(1,len(data)):
             for j in range(len(data[0])):
@@ -190,7 +190,7 @@ def sort_list_pupils():
         res.update(begin)
         key.insert(0, "year")
         print(res)
-    with open("sorted_student_counts.csv", "w", encoding='utf-8', newline='') as file_out:
+    with open("csv/sorted_student_counts.csv", "w", encoding='utf-8', newline='') as file_out:
         writer = csv.writer(file_out, delimiter=",")
         writer.writerow(key)
         for i in range(len(res["year"])):
@@ -203,7 +203,7 @@ def sort_list_pupils():
 #13 spicy
 def get_chipiest_good():
     res={}
-    with open("prices.csv", encoding='utf-8', ) as file_in:
+    with open("csv/prices.csv", encoding='utf-8', ) as file_in:
         data = [el for el in csv.reader(file_in, delimiter=";")]
         head = data.pop(0)
         for el in data:

@@ -186,7 +186,7 @@ def serch_min_res():
 def gruming_astro_diary():
     data = []
     tmp = ""
-    with open("diary.txt", "r", encoding="UTF-8") as f:
+    with open("txts/diary.txt", "r", encoding="UTF-8") as f:
         for line in f:
             tmp+=line
     data = tmp.split("\n\n")
