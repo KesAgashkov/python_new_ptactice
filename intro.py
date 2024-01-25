@@ -311,3 +311,11 @@ def hellish_task():
         print(f"Summary: {summ}")
         print()
 
+#19
+def solve_cyfer():
+    let = 'abcdefghijklmnopqrstuvwxyz'
+    dct = {ch:el for ch, el in zip(let, list(input()))}
+
+    print(*[dct[el.lower()] if el.lower() in dct else el for el in input()], sep="")
+
+
