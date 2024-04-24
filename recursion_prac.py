@@ -318,3 +318,7 @@ def dict_travel(data, new_str = ""):
 data = {'a': 1, 'b': {'c': 30, 'a': 10, 'b': 20}}
 
 dict_travel(data)
+
+#28 Анонимная рекурсивная функция
+
+fib = lambda n: 1 if n in (1,2) else fib(n - 1) + fib(n - 2)
